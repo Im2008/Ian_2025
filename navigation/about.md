@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Creator of Student 2025
+My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are volleyball, biking, programming, 
