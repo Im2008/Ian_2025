@@ -1,7 +1,7 @@
 ---
 layout: page
 title: History
-search_exclude: true
+search_exclude: false
 permalink: /history/
 ---
 <!DOCTYPE html>
