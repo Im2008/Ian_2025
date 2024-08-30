@@ -1,6 +1,6 @@
 ---
 layout: page
-title: history
+title: History
 permalink: /history/
 ---
 <!DOCTYPE html>
