@@ -213,17 +213,11 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
 </style>
 <html>
   <body>
-    <div class = "Border_1">
-      <button id="Chicken"> This button does nothing...</button>
-    </div>
+    <button id="Chicken"><div class = "Border_1"> This button does nothing...</div></button>
       <br>
-    <div class = "Border_2">
-      <a href = "navigation/section/csp"><button id="chicken1"> This button gets you to the CSP page</button></a>
-    </div>
+    <a href = "navigation/section/csp"><button id="chicken1"><div class = "Border_2"> This button gets you to the CSP page</div></button></a>
       <br>
-    <div class = "Border_3">
-      <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"> This button gets you to DNHS bell schedule</button></a>
-    </div>
-    <br><hr>
+    <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
+      <br><hr>
   </body>
 </html>
