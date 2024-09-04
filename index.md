@@ -197,7 +197,7 @@ This page is a forked page from student_2025, and portfolio_2025.
 This is Ian's Nighthawk Homepage. Here are three buttons:
 <style>
   hr {
-    border-width: thick;
+    border-width: thin;
     border-style: solid;
     border-color: white;
   }
