@@ -190,8 +190,17 @@ hide: true
 
 </script>
 
+My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are volleyball, biking, and basketball. After school, I practice volleyball, work, and sleep.
+
+This page is a forked page from student_2025, and portfolio_2025.
+
 This is Ian's Nighthawk Homepage. Here are three buttons:
 <style>
+  hr {
+    border-width: thick;
+    border-style: solid;
+    border-color: white;
+  }
   .Border_1 {
     border-style: solid;
     border-color: lightgray;
