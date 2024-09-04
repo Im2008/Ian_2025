@@ -194,8 +194,20 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
 <style>
   .Border_1 {
     border-style: solid;
+    border-color: lightgreen;
+    box-shadow: 2px 2px 1px 1px white;
+    border-width: thick;
+  }
+  .Border_2 {
+    border-style: solid;
     border-color: green;
-    box-shadow: 2px 2px 1px 1px green;
+    box-shadow: 2px 2px 1px 1px white;
+    border-width: thick;
+  }
+  .Border_3 {
+    border-style: solid;
+    border-color: darkgreen;
+    box-shadow: 2px 2px 1px 1px white;
     border-width: thick;
   }
 </style>
@@ -203,9 +215,13 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
   <body>
     <div class = "Border_1">
       <button id="Chicken"> This button does nothing...</button>
+    </div>
       <br>
+    <div class = "Border_2">
       <a href = "navigation/section/csp"><button id="chicken1"> This button gets you to the CSP page</button></a>
+    </div>
       <br>
+    <div class = "Border_3">
       <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"> This button gets you to DNHS bell schedule</button></a>
     </div>
     <br><hr>
