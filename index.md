@@ -200,13 +200,13 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
   }
   .Border_2 {
     border-style: solid;
-    border-color: gray;
+    border-color: darkgray;
     box-shadow: 2px 2px 0px 1px white;
     border-width: thick;
   }
   .Border_3 {
     border-style: solid;
-    border-color: darkgray;
+    border-color: gray;
     box-shadow: 2px 2px 0px 1px white;
     border-width: thick;
   }
