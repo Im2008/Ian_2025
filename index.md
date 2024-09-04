@@ -195,19 +195,19 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
   .Border_1 {
     border-style: solid;
     border-color: lightgray;
-    box-shadow: 2px 2px 1px 1px white;
+    box-shadow: 2px 2px 0px 1px white;
     border-width: thick;
   }
   .Border_2 {
     border-style: solid;
     border-color: gray;
-    box-shadow: 2px 2px 1px 1px white;
+    box-shadow: 2px 2px 0px 1px white;
     border-width: thick;
   }
   .Border_3 {
     border-style: solid;
     border-color: darkgray;
-    box-shadow: 2px 2px 1px 1px white;
+    box-shadow: 2px 2px 0px 1px white;
     border-width: thick;
   }
 </style>
