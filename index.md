@@ -191,11 +191,22 @@ hide: true
 </script>
 
 This is Ian's Nighthawk Homepage. Here are three buttons:
-
+<style>
+  .Border_1 {
+    border-style: dotted;
+    border-color: green;
+    box-shadow: 2px 2px 1px 1px green;
+  }
+</style>
 <html>
   <body>
-    <button id="hi"> This button does nothing...</button>
-    <a href = "navigation/section/csp.md"><button id="hi2"> This button gets you to the CSP page</button></a>
-    <a href = "_posts/Foundation/2024-08-29-Tools_History.md"><button id="hi3"> This button gets you to my history</button></a>
+    <div class = "Border_1">
+      <button id="Chicken"> This button does nothing...</button>
+      <br>
+      <a href = "navigation/section/csp.md"><button id="chicken1"> This button gets you to the CSP page</button></a>
+      <br>
+      <a href = "_posts/Foundation/2024-08-29-Tools_History.md"><button id="chicken2"> This button gets you to my history</button></a>
+    </div>
+    <br><hr>
   </body>
 </html>
