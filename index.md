@@ -222,10 +222,16 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
 </style>
 <html>
   <body>
+    <h2> Placeholder Button: </h2>
+    <hr>
     <button id="Chicken"><div class = "Border_1"> This button does nothing...</div></button>
       <br>
+    <h2> CSP page Button: </h2>
+    <hr>
     <a href = "navigation/section/csp"><button id="chicken1"><div class = "Border_2"> This button gets you to the CSP page</div></button></a>
       <br>
+    <h2> DNHS page Button: </h2>
+    <hr>
     <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
       <br><hr>
   </body>
