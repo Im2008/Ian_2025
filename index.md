@@ -195,7 +195,7 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
 <html>
   <body>
     <button id="hi"> This button does nothing...</button>
-    <a href = "Ian_2025/navigation/section/csp.md"><button id="hi2"> This button gets you to the CSP page</button></a>
-    <a href = "Ian_2025/_posts/Foundation/2024-08-29-Tools_History.md"><button id="hi3"> This button gets you to my history</button></a>
+    <a href = "navigation/section/csp.md"><button id="hi2"> This button gets you to the CSP page</button></a>
+    <a href = "_posts/Foundation/2024-08-29-Tools_History.md"><button id="hi3"> This button gets you to my history</button></a>
   </body>
 </html>
