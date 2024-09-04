@@ -193,9 +193,10 @@ hide: true
 This is Ian's Nighthawk Homepage. Here are three buttons:
 <style>
   .Border_1 {
-    border-style: dotted;
+    border-style: solid;
     border-color: green;
     box-shadow: 2px 2px 1px 1px green;
+    border-width: thick;
   }
 </style>
 <html>
@@ -203,9 +204,9 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
     <div class = "Border_1">
       <button id="Chicken"> This button does nothing...</button>
       <br>
-      <a href = "navigation/section/csp.md"><button id="chicken1"> This button gets you to the CSP page</button></a>
+      <a href = "navigation/section/csp"><button id="chicken1"> This button gets you to the CSP page</button></a>
       <br>
-      <a href = "_posts/Foundation/2024-08-29-Tools_History.md"><button id="chicken2"> This button gets you to my history</button></a>
+      <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"> This button gets you to DNHS bell schedule</button></a>
     </div>
     <br><hr>
   </body>
