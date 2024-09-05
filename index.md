@@ -194,9 +194,6 @@ My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are
 
 This page is a forked page from student_2025, and portfolio_2025.
 
-<img src = "images/mario_animation.png" alt= "mario latyout image" width="200" height="300">
-<h5> This is a mario animation image </h5>
-
 This is My Nighthawk Homepage. Here are three buttons:
 <style>
   hr {
@@ -236,10 +233,13 @@ This is My Nighthawk Homepage. Here are three buttons:
     <h2> DNHS page Button: </h2>
     <hr>
     <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
+    <br><br>
+    <img src = "images/logo.png" alt= "Logo img" width="50" height="50">
+    <h5> Image of the logo </h5>
       <br><hr>
-      <h3> EXAMPLE BUTTONS: W/ & W/O LINK </h3>
-      <button id = "x">Without</button>
-      <br><br>
-      <a href="about:blank"><button id = "x">With</button></a>
+    <h3> EXAMPLE BUTTONS: W/ & W/O LINK </h3>
+    <button id = "x">Without</button>
+    <br><br>
+    <a href="about:blank"><button id = "x">With</button></a>
   </body>
 </html>
