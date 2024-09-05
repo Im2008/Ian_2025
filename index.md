@@ -194,7 +194,7 @@ My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are
 
 This page is a forked page from student_2025, and portfolio_2025.
 
-This is Ian's Nighthawk Homepage. Here are three buttons:
+This is My Nighthawk Homepage. Here are three buttons:
 <style>
   hr {
     border-width: thin;
@@ -234,5 +234,9 @@ This is Ian's Nighthawk Homepage. Here are three buttons:
     <hr>
     <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
       <br><hr>
+      <h3> EXAMPLE BUTTONS: W/ & W/O LINK </h3>
+      <button id = "x">Without</button>
+      <br><br>
+      <a href="about:blank"><button id = "x">With</button></a>
   </body>
 </html>
