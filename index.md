@@ -6,6 +6,7 @@ image: /images/mario_animation.png
 hide: true
 ---
 
+
 <!-- Liquid:  statements -->
 
 <!-- Include submenu from _includes to top of pages -->
@@ -234,7 +235,7 @@ This is My Nighthawk Homepage. Here are three buttons:
     <hr>
     <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
     <br><br><br><br>
-    <img src = "images/logo.png" alt= "Logo img" width="50" height="50">
+    <img src = "images/Chicken_Sandwich.png" alt= "Logo img" width="50" height="50">
       <br><hr>
     <h3> EXAMPLE BUTTONS: W/ & W/O LINK </h3>
     <button id = "x">Without</button>
