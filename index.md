@@ -194,6 +194,9 @@ My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are
 
 This page is a forked page from student_2025, and portfolio_2025.
 
+<img src = "images/mario_animation.png" alt= "mario latyout image" width="200" height="300">
+<h5> This is a mario animation image </h5>
+
 This is My Nighthawk Homepage. Here are three buttons:
 <style>
   hr {
