@@ -220,6 +220,20 @@ This is My Nighthawk Homepage. Here are three buttons:
     box-shadow: 2px 2px 0px 1px white;
     border-width: thick;
   }
+  .chicken_sandwich {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 </style>
 <html>
   <body>
@@ -235,7 +249,7 @@ This is My Nighthawk Homepage. Here are three buttons:
     <hr>
     <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
       <br><br><br><br>
-    <div class = "Border_1"> <img src = "images/Chicken_Sandwich.png" alt= "Logo img" width="250" height="250"> </div>
+    <div class ="chicken_sandwich"><img src = "images/Chicken_Sandwich.png" alt= "Logo img" width="250" height="250"></div>
       <br><hr>
     <h3> EXAMPLE BUTTONS: W/ & W/O LINK </h3>
     <button id = "x">Without</button>
