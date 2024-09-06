@@ -10,8 +10,9 @@ permalink: /about/
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <p>My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are volleyball, biking, programming, and playing basketball occasionally. After school, I usually do my homework, practice volleyball, and shower towards the end of the day.</p>
-</body>
+    <body>
+        <p>My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are volleyball, biking, programming, and playing basketball occasionally. After school, I usually do my homework, practice volleyball, and shower towards the end of the day.</p>
+        <img src = "images/Chicken_Sandwich.png" alt= "Logo img" width="250" height="250"> 
+    </body>
 </html>
 
