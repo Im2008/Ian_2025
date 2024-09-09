@@ -1,0 +1,20 @@
+.calc-button {
+  @include button();
+}
+
+@keyframes rainbow {
+  // 0% { color: red; }
+  14% { color: orange; }
+  28% { background-color: yellow; }
+  42% { border-color: red; }
+  // 57% { background-color: red; }
+  71% { background-color: red; }
+  85% { background-color: violet; }
+  100% { background-color: yellow; }
+}
+
+.rainbow {
+  width: 100px;
+  height: 100px;
+  animation: rainbow 1s linear;
+}
