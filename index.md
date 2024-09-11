@@ -64,6 +64,7 @@ hide: true
       this.positionX = 0;
       this.positionY = 0; // Track vertical position for jumping
       this.isJumping = false; // Prevent multiple jumps
+      this.isFacingRight = true; // Track Mario's direction
       this.currentSpeed = 0;
       this.marioElement = document.getElementById("mario");
       this.pixels = {{pixels}};
@@ -99,19 +100,43 @@ hide: true
       }, this.interval);
     }
 
-    startWalking() {
+    startWalking(direction) {
       this.stopAnimate();
-      this.animate(this.obj["Walk"], 3);
+
+      // Determine the walking direction and adjust the sprite flip
+      if (direction === 'right') {
+        this.marioElement.style.transform = 'scaleX(1)'; // Face right
+        this.animate(this.obj["Walk"], 3); // Animate walking right
+        this.isFacingRight = true;
+      } else if (direction === 'left') {
+        this.marioElement.style.transform = 'scaleX(-1)'; // Face left
+        this.animate(this.obj["Walk"], -3); // Animate walking left
+        this.isFacingRight = false;
+      }
     }
 
-    startRunning() {
+    startRunning(direction) {
       this.stopAnimate();
-      this.animate(this.obj["Run1"], 6);
+
+      if (direction === 'right') {
+        this.marioElement.style.transform = 'scaleX(1)'; // Face right
+        this.animate(this.obj["Run1"], 6); // Animate running right
+        this.isFacingRight = true;
+      } else if (direction === 'left') {
+        this.marioElement.style.transform = 'scaleX(-1)'; // Face left
+        this.animate(this.obj["Run1"], -6); // Animate running left
+        this.isFacingRight = false;
+      }
     }
 
     startJumping() {
       if (!this.isJumping) {
         this.isJumping = true;
+
+        // Set the jump animation (change to your Jump metadata)
+        this.marioElement.style.backgroundPosition = `-${this.obj["Jump"].col * this.pixels}px 
+                                                      -${this.obj["Jump"].row * this.pixels}px`;
+
         let jumpInterval = setInterval(() => {
           // Move Mario up until the jump height is reached
           if (this.positionY < this.jumpHeight) {
@@ -130,6 +155,14 @@ hide: true
                 this.positionY = 0;
                 this.marioElement.style.bottom = `0px`; // Reset to ground level
                 this.isJumping = false; // Allow jumping again
+
+                // After the jump, return to walking or standing animation
+                if (this.currentSpeed !== 0) {
+                  this.startWalking(this.isFacingRight ? 'right' : 'left');
+                } else {
+                  this.marioElement.style.backgroundPosition = `-${this.obj["Rest"].col * this.pixels}px 
+                                                                -${this.obj["Rest"].row * this.pixels}px`;
+                }
               }
             }, 20);
           }
@@ -149,12 +182,10 @@ hide: true
   window.addEventListener("keydown", (event) => {
     if (event.key === "ArrowRight") {
       event.preventDefault();
-      mario.currentSpeed = 3; // Walk right
-      mario.startWalking();
+      mario.startWalking('right'); // Walk right
     } else if (event.key === "ArrowLeft") {
       event.preventDefault();
-      mario.currentSpeed = -3; // Walk left
-      mario.startWalking();
+      mario.startWalking('left'); // Walk left
     } else if (event.key === "ArrowUp") {
       event.preventDefault();
       mario.startJumping(); // Jump
@@ -166,28 +197,6 @@ hide: true
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
       mario.stopAnimate();
     }
-  });
-
-  // Touch event handling for mobile devices
-  window.addEventListener("touchstart", (event) => {
-    event.preventDefault();
-    if (event.touches[0].clientX > window.innerWidth / 2) {
-      mario.currentSpeed = 3; // Walk right
-      mario.startWalking();
-    } else {
-      mario.currentSpeed = -3; // Walk left
-      mario.startWalking();
-    }
-  });
-
-  // Stop Mario's movement on window blur (when the window loses focus)
-  window.addEventListener("blur", () => {
-    mario.stopAnimate();
-  });
-
-  // Stop Mario's movement when the touch event ends
-  window.addEventListener("touchend", (event) => {
-    mario.stopAnimate();
   });
 
   document.addEventListener("DOMContentLoaded", () => {
