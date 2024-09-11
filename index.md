@@ -70,9 +70,9 @@ hide: true
       this.pixels = {{pixels}};
       this.interval = 100;
       this.obj = meta_data;
-      this.gravity = 10; // gravity value for jumping
-      this.jumpHeight = 150; // height of the jump
-      this.jumpSpeed = 10; // speed of the jump
+      this.gravity = 5; // Adjusted gravity for smoother jump
+      this.jumpHeight = 100; // Adjusted height of the jump
+      this.jumpSpeed = 5; // Adjusted speed of the jump
       this.marioElement.style.position = "absolute";
       this.marioElement.style.bottom = "0px"; // Start at the bottom (ground level)
     }
@@ -103,14 +103,13 @@ hide: true
     startWalking(direction) {
       this.stopAnimate();
 
-      // Determine the walking direction and adjust the sprite flip
       if (direction === 'right') {
         this.marioElement.style.transform = 'scaleX(1)'; // Face right
-        this.animate(this.obj["Walk"], 3); // Animate walking right
+        this.animate(this.obj["Walk"], 3); // Walk right
         this.isFacingRight = true;
       } else if (direction === 'left') {
         this.marioElement.style.transform = 'scaleX(-1)'; // Face left
-        this.animate(this.obj["Walk"], -3); // Animate walking left
+        this.animate(this.obj["Walk"], -3); // Walk left
         this.isFacingRight = false;
       }
     }
@@ -120,11 +119,11 @@ hide: true
 
       if (direction === 'right') {
         this.marioElement.style.transform = 'scaleX(1)'; // Face right
-        this.animate(this.obj["Run1"], 6); // Animate running right
+        this.animate(this.obj["Run1"], 6); // Run right
         this.isFacingRight = true;
       } else if (direction === 'left') {
         this.marioElement.style.transform = 'scaleX(-1)'; // Face left
-        this.animate(this.obj["Run1"], -6); // Animate running left
+        this.animate(this.obj["Run1"], -6); // Run left
         this.isFacingRight = false;
       }
     }
@@ -133,12 +132,11 @@ hide: true
       if (!this.isJumping) {
         this.isJumping = true;
 
-        // Set the jump animation (change to your Jump metadata)
+        // Set the jump animation
         this.marioElement.style.backgroundPosition = `-${this.obj["Jump"].col * this.pixels}px 
                                                       -${this.obj["Jump"].row * this.pixels}px`;
 
         let jumpInterval = setInterval(() => {
-          // Move Mario up until the jump height is reached
           if (this.positionY < this.jumpHeight) {
             this.positionY += this.jumpSpeed;
             this.marioElement.style.bottom = `${this.positionY}px`;
@@ -154,9 +152,9 @@ hide: true
                 clearInterval(fallInterval);
                 this.positionY = 0;
                 this.marioElement.style.bottom = `0px`; // Reset to ground level
-                this.isJumping = false; // Allow jumping again
+                this.isJumping = false;
 
-                // After the jump, return to walking or standing animation
+                // Return to walking/resting animation
                 if (this.currentSpeed !== 0) {
                   this.startWalking(this.isFacingRight ? 'right' : 'left');
                 } else {
@@ -177,22 +175,25 @@ hide: true
 
   const mario = new Mario(mario_metadata);
 
-  ////////// Arrow key controls /////////
-
+  // Arrow key controls
   window.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      mario.startWalking('right'); // Walk right
-    } else if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      mario.startWalking('left'); // Walk left
-    } else if (event.key === "ArrowUp") {
-      event.preventDefault();
-      mario.startJumping(); // Jump
+    switch (event.key) {
+      case "ArrowRight":
+        event.preventDefault();
+        mario.startWalking('right');
+        break;
+      case "ArrowLeft":
+        event.preventDefault();
+        mario.startWalking('left');
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        mario.startJumping();
+        break;
     }
   });
 
-  // Stop Mario's movement when the arrow key is released
+  // Stop movement on key release
   window.addEventListener("keyup", (event) => {
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
       mario.stopAnimate();
@@ -201,9 +202,9 @@ hide: true
 
   document.addEventListener("DOMContentLoaded", () => {
     // Adjust sprite size for high pixel density devices
-    const scale = Math.min(window.devicePixelRatio, 2);
+    const scale = window.devicePixelRatio < 1.5 ? 1 : 0.5; // Scale down for large screens
     const sprite = document.querySelector(".sprite");
-    sprite.style.transform = `scale(${0.2 * scale})`;
+    sprite.style.transform = `scale(${scale})`;
     mario.startResting();
   });
 </script>
