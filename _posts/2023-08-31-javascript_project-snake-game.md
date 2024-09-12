@@ -11,7 +11,8 @@ comments: false
 
 <style>
 
-    body{
+    body, html{
+        overflow: auto; /*added to prevent arrow keys from being weird */
     }
     .wrap{
         margin-left: auto;
