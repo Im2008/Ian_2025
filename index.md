@@ -33,11 +33,11 @@ hide: true
   }
 
   .sprite {
-    height: 256px;
-    width: 256px;
+    height: {{pixels}}px;
+    width: {{pixels}}px;
     background-image: url('{{sprite_file}}');
     background-repeat: no-repeat;
-    position: fixed; /* So Mario can move around */
+    position: absolute; /* So Mario can move around */
     bottom: 0; /* Start on the "ground" */
   }
 
