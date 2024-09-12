@@ -85,19 +85,22 @@ hide: true
       const animateStep = () => {
         const col = (frame + obj.col) * this.pixels;
         this.marioElement.style.backgroundPosition = `-${col}px -${row}px`;
-        this.marioElement.style.left = `${this.positionX}px`;
 
-        this.positionX += speed;
-        frame = (frame + 1) % obj.frames;
+        // Update position based on current speed
+        this.positionX += this.currentSpeed;
 
         // Ensure Mario stays within the viewport
         const viewportWidth = window.innerWidth;
         if (this.positionX > viewportWidth - this.pixels) {
-          this.positionX = viewportWidth - this.pixels; // Stop at right edge
+          this.positionX = viewportWidth - this.pixels; // Stop at the right edge
         } else if (this.positionX < 0) {
-          this.positionX = 0; // Stop at left edge
+          this.positionX = 0; // Stop at the left edge
         }
 
+        // Apply the positionX to Mario's style
+        this.marioElement.style.left = `${this.positionX}px`;
+
+        frame = (frame + 1) % obj.frames;
         this.tID = requestAnimationFrame(animateStep);
       };
 
