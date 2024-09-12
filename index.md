@@ -29,7 +29,7 @@ hide: true
   body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* Prevent scrollbars */
+    overflow: auto; /* Prevent scrollbars */
   }
 
   .sprite {
@@ -37,7 +37,7 @@ hide: true
     width: {{pixels}}px;
     background-image: url('{{sprite_file}}');
     background-repeat: no-repeat;
-    position: absolute; /* So Mario can move around */
+    position: fixed; /* So Mario can move around */
     bottom: 0; /* Start on the "ground" */
   }
 
@@ -85,6 +85,13 @@ hide: true
       const animateStep = () => {
         const col = (frame + obj.col) * this.pixels;
         this.marioElement.style.backgroundPosition = `-${col}px -${row}px`;
+
+        // Flip Mario's sprite when moving left
+        if (this.currentSpeed < 0) {
+          this.marioElement.style.transform = "scaleX(-1)"; // Flip horizontally
+        } else {
+          this.marioElement.style.transform = "scaleX(1)"; // Normal orientation when moving right
+        }
 
         // Update position based on current speed
         this.positionX += this.currentSpeed;
