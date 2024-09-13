@@ -202,10 +202,4 @@ function start() {
 }
 
 </script>
-<script src="https://utteranc.es/client.js"
-        repo="Im2008/Ian_2025"
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
+
