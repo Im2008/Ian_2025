@@ -6,7 +6,7 @@ categories: [Javascript]
 permalink: /javascript/project/calculator
 menu: nav/javascript_project.html
 toc: true
-comments: false
+comments: true
 ---
 
 <!-- 
@@ -218,6 +218,13 @@ vantaInstance({
   touchControls: true,
   gyroControls: false
 });
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="Im2008/Ian_2025"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 
 

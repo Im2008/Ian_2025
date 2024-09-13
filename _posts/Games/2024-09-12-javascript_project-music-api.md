@@ -7,7 +7,7 @@ categories: [Javascript]
 permalink: /javascript/project/music-api
 menu: nav/javascript_project.html
 toc: true
-comments: false
+comments: true
 ---
 
 <!-- Input box and button for filter -->
@@ -123,5 +123,12 @@ comments: false
         resultContainer.appendChild(tr);
       });
   }
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="Im2008/Ian_2025"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
 

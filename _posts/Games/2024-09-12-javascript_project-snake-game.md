@@ -6,7 +6,7 @@ categories: [Javascript]
 menu: nav/javascript_project.html
 permalink: /javascript/project/snake
 toc: true
-comments: false
+comments: true
 ---
 
 <style>
@@ -373,4 +373,11 @@ comments: false
             if(wall === 1){screen_snake.style.borderColor = "#FFFFFF";}
         }
     })();
+</script>
+<script src="https://utteranc.es/client.js"
+        repo="Im2008/Ian_2025"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
 </script>
