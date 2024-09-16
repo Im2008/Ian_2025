@@ -26,55 +26,51 @@ hide: true
         define how HTML elements look 
 --->
 <style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    overflow: auto; /* Prevent scrollbars */
-  }
 
+  /*CSS style rules for the id and class of the sprite...
+  */
   .sprite {
     height: {{pixels}}px;
     width: {{pixels}}px;
     background-image: url('{{sprite_file}}');
     background-repeat: no-repeat;
-    position: absolute; /* So Mario can move around */
-    bottom: 0; /* Start on the "ground" */
   }
 
+  /*background position of sprite element
+  */
   #mario {
-    background-position: calc({{mario_metadata["Walk"].col}} * {{pixels}} * -1px) 
-                         calc({{mario_metadata["Walk"].row}} * {{pixels}} * -1px);
+    background-position: calc({{animations[0].col}} * {{pixels}} * -1px) calc({{animations[0].row}} * {{pixels}}* -1px);
   }
 </style>
 
+<!--- Embedded executable code--->
 <script>
-  var mario_metadata = {}; 
+  ////////// convert YML hash to javascript key:value objects /////////
+
+  var mario_metadata = {}; //key, value object
   {% for key in hash %}  
-  var mario_key = "{{key | first}}";
-  var values = {};
-  values["row"] = {{key.row}};
-  values["col"] = {{key.col}};
-  values["frames"] = {{key.frames}};
-  mario_metadata[mario_key] = values;
+  
+  var key = "{{key | first}}"  //key
+  var values = {} //values object
+  values["row"] = {{key.row}}
+  values["col"] = {{key.col}}
+  values["frames"] = {{key.frames}}
+  mario_metadata[key] = values; //key with values added
+
   {% endfor %}
+
+  ////////// game object for player /////////
 
   class Mario {
     constructor(meta_data) {
-      this.tID = null;
-      this.positionX = 0;
-      this.positionY = 0; // Track vertical position for jumping
-      this.isJumping = false; // Prevent multiple jumps
-      this.isFacingRight = true; // Track Mario's direction
+      this.tID = null;  //capture setInterval() task ID
+      this.positionX = 0;  // current position of sprite in X direction
       this.currentSpeed = 0;
-      this.marioElement = document.getElementById("mario");
-      this.pixels = {{pixels}};
-      this.interval = 100;
+      this.marioElement = document.getElementById("mario"); //HTML element of sprite
+      this.pixels = {{pixels}}; //pixel offset of images in the sprite, set by liquid constant
+      this.interval = 100; //animation time interval
       this.obj = meta_data;
-      this.gravity = 10; // gravity value for jumping
-      this.jumpHeight = 150; // height of the jump
-      this.jumpSpeed = 10; // speed of the jump
       this.marioElement.style.position = "absolute";
-      this.marioElement.style.bottom = "0px"; // Start at the bottom (ground level)
     }
 
     animate(obj, speed) {
@@ -82,36 +78,19 @@ hide: true
       const row = obj.row * this.pixels;
       this.currentSpeed = speed;
 
-      const animateStep = () => {
+      this.tID = setInterval(() => {
         const col = (frame + obj.col) * this.pixels;
         this.marioElement.style.backgroundPosition = `-${col}px -${row}px`;
-
-        // Flip Mario's sprite when moving left
-        if (this.currentSpeed < 0) {
-          this.marioElement.style.transform = "scaleX(-1)"; // Flip horizontally
-        } else {
-          this.marioElement.style.transform = "scaleX(1)"; // Normal orientation when moving right
-        }
-
-        // Update position based on current speed
-        this.positionX += this.currentSpeed;
-
-        // Ensure Mario stays within the viewport
-        const viewportWidth = window.innerWidth;
-        if (this.positionX > viewportWidth - this.pixels) {
-          this.positionX = viewportWidth - this.pixels; // Stop at the right edge
-        } else if (this.positionX < 0) {
-          this.positionX = 0; // Stop at the left edge
-        }
-
-        // Apply the positionX to Mario's style
         this.marioElement.style.left = `${this.positionX}px`;
 
+        this.positionX += speed;
         frame = (frame + 1) % obj.frames;
-        this.tID = requestAnimationFrame(animateStep);
-      };
 
-      this.tID = requestAnimationFrame(animateStep);
+        const viewportWidth = window.innerWidth;
+        if (this.positionX > viewportWidth - this.pixels) {
+          document.documentElement.scrollLeft = this.positionX - viewportWidth + this.pixels;
+        }
+      }, this.interval);
     }
 
     startWalking() {
@@ -124,88 +103,92 @@ hide: true
       this.animate(this.obj["Run1"], 6);
     }
 
-    startJumping() {
-      if (!this.isJumping) {
-        this.isJumping = true;
-        let jumpInterval = setInterval(() => {
-          if (this.positionY < this.jumpHeight) {
-            this.positionY += this.jumpSpeed;
-            this.marioElement.style.bottom = `${this.positionY}px`;
-          } else {
-            clearInterval(jumpInterval);
-            let fallInterval = setInterval(() => {
-              if (this.positionY > 0) {
-                this.positionY -= this.gravity;
-                this.marioElement.style.bottom = `${this.positionY}px`;
-              } else {
-                clearInterval(fallInterval);
-                this.positionY = 0;
-                this.marioElement.style.bottom = `0px`; // Reset to ground level
-                this.isJumping = false; // Allow jumping again
-              }
-            }, 20);
-          }
-        }, 20);
-      }
+    startPuffing() {
+      this.stopAnimate();
+      this.animate(this.obj["Puff"], 0);
+    }
+
+    startCheering() {
+      this.stopAnimate();
+      this.animate(this.obj["Cheer"], 0);
+    }
+
+    startFlipping() {
+      this.stopAnimate();
+      this.animate(this.obj["Flip"], 0);
+    }
+
+    startResting() {
+      this.stopAnimate();
+      this.animate(this.obj["Rest"], 0);
     }
 
     stopAnimate() {
-      if (this.tID) {
-        cancelAnimationFrame(this.tID);
-        this.tID = null;
-      }
-      this.marioElement.style.backgroundPosition = `-${mario_metadata["Walk"].col * this.pixels}px -${mario_metadata["Walk"].row * this.pixels}px`;
+      clearInterval(this.tID);
     }
   }
 
   const mario = new Mario(mario_metadata);
 
+  ////////// event control /////////
+
   window.addEventListener("keydown", (event) => {
     if (event.key === "ArrowRight") {
       event.preventDefault();
-      mario.currentSpeed = 3; // Walk right
-      mario.startWalking();
+      if (event.repeat) {
+        mario.startCheering();
+      } else {
+        if (mario.currentSpeed === 0) {
+          mario.startWalking();
+        } else if (mario.currentSpeed === 3) {
+          mario.startRunning();
+        }
+      }
     } else if (event.key === "ArrowLeft") {
       event.preventDefault();
-      mario.currentSpeed = -3; // Walk left
-      mario.startWalking();
-    } else if (event.key === "ArrowUp") {
-      event.preventDefault();
-      mario.startJumping(); // Jump
+      if (event.repeat) {
+        mario.stopAnimate();
+      } else {
+        mario.startPuffing();
+      }
     }
   });
 
-  window.addEventListener("keyup", (event) => {
-    if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
-      mario.stopAnimate();
-    }
-  });
-
+  //touch events that enable animations
   window.addEventListener("touchstart", (event) => {
-    event.preventDefault();
+    event.preventDefault(); // prevent default browser action
     if (event.touches[0].clientX > window.innerWidth / 2) {
-      mario.currentSpeed = 3; // Walk right
-      mario.startWalking();
+      // move right
+      if (currentSpeed === 0) { // if at rest, go to walking
+        mario.startWalking();
+      } else if (currentSpeed === 3) { // if walking, go to running
+        mario.startRunning();
+      }
     } else {
-      mario.currentSpeed = -3; // Walk left
-      mario.startWalking();
+      // move left
+      mario.startPuffing();
     }
   });
 
+  //stop animation on window blur
   window.addEventListener("blur", () => {
     mario.stopAnimate();
   });
 
-  window.addEventListener("touchend", (event) => {
-    mario.stopAnimate();
+  //start animation on window focus
+  window.addEventListener("focus", () => {
+     mario.startFlipping();
   });
 
+  //start animation on page load or page refresh
   document.addEventListener("DOMContentLoaded", () => {
-    const scale = Math.min(window.devicePixelRatio, 2);
+    // adjust sprite size for high pixel density devices
+    const scale = window.devicePixelRatio;
     const sprite = document.querySelector(".sprite");
     sprite.style.transform = `scale(${0.2 * scale})`;
     mario.startResting();
   });
+
 </script>
 
 My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are volleyball, biking, and basketball. After school, I practice volleyball, work, and sleep.
