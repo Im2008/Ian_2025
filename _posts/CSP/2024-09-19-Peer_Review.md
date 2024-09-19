@@ -4,7 +4,7 @@ title: Peer review
 description: skibidi
 type: ccc
 courses: {'csp': {'week': 1}}
-comment: true
+comments: true
 ---
 
 <p> test </p>
