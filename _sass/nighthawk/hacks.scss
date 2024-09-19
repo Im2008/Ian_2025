@@ -3,13 +3,10 @@
 }
 
 @keyframes rainbow {
-  // 0% { color: red; }
-  14% { color: orange; }
-  28% { background-color: yellow; }
-  42% { border-color: red; }
-  // 57% { background-color: red; }
-  71% { background-color: red; }
-  85% { background-color: violet; }
+  8% { color: green; }
+  21% { background-color: blue; }
+  73% { background-color: whitesmoke; }
+  82% { background-color: violet; }
   100% { background-color: yellow; }
 }
 
@@ -18,3 +15,24 @@
   height: 100px;
   animation: rainbow 1s linear;
 }
+
+@keyframes spin {
+  25% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes move {
+  50% {
+    transform: translateX(0);
+  }
+}
+
+
+.spinMove {
+  width: 150px;
+  height: 150px;
+  animation: spinMove 10s linear infinite;
+}
+
+
