@@ -196,6 +196,19 @@ My Name is Ian Manangan and I'm a Junior at Del Norte Highschool. My hobbies are
 
 This page is a forked page from student_2025, and portfolio_2025.
 
+Name: Ian Manangan
+Age: 16 years old
+
+Interests and Hobbies:
+- Volleyball, I played for 2 years.
+
+Other Hobbies:
+- Video games
+- Biking
+- Volleyball
+- Basketball
+- Reffing
+
 This is My Nighthawk Homepage. Here are three buttons:
 <style>
   hr {
