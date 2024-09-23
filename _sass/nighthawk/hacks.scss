@@ -1,7 +1,37 @@
+//References the calculator button from "project-calculator"
 .calc-button {
   @include button();
 }
 
+//CSS rainbow properties, (width, height, the animation).
+.rainbow {
+  width: 100px;
+  height: 100px;
+  animation: rainbow 1s linear;
+}
+
+//SPINNNN
+.spinMove {
+  width: 150px;
+  height: 150px;
+  animation: spinMove 10s linear infinite;
+}
+
+//CS props, allows spin transformations based on where its set to (ex: spinning an image)
+@keyframes spin {
+  25% {
+    transform: rotate(0deg);
+  }
+}
+
+//CS props, moves an image visibly through the x-axis. Direction changes based on if it goes from the x or y axis.
+@keyframes move {
+  50% {
+    transform: translateX(0);
+  }
+}
+
+//main keyframes for the css value (.rainbow).
 @keyframes rainbow {
   8% { color: green; }
   21% { background-color: blue; }
@@ -9,30 +39,4 @@
   82% { background-color: violet; }
   100% { background-color: yellow; }
 }
-
-.rainbow {
-  width: 100px;
-  height: 100px;
-  animation: rainbow 1s linear;
-}
-
-@keyframes spin {
-  25% {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes move {
-  50% {
-    transform: translateX(0);
-  }
-}
-
-
-.spinMove {
-  width: 150px;
-  height: 150px;
-  animation: spinMove 10s linear infinite;
-}
-
 

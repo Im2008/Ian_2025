@@ -83,6 +83,9 @@ comments: true
   <!-- Upgrade button -->
   <button id="upgrade-btn" class="upgrade-btn" disabled>Upgrade (Cost: 50 cookies)</button>
 
+  <!-- Add audio element for click sound -->
+  <audio id="click-sound" src="audio/clicker.mp3"></audio>
+
   <script>
     let cookieCount = 0;
     let cookiesPerClick = 1;
@@ -91,6 +94,7 @@ comments: true
     const cookieBtn = document.getElementById('cookie-btn');
     const cookieCountDisplay = document.getElementById('cookie-count');
     const upgradeBtn = document.getElementById('upgrade-btn');
+    const clickSound = document.getElementById('click-sound');
 
     // Update the cookie count display
     function updateCookieCount() {
@@ -99,6 +103,10 @@ comments: true
 
     // Handle cookie button click
     cookieBtn.addEventListener('click', () => {
+      // Play the click sound
+      clickSound.play();
+
+      // Update the cookie count
       cookieCount += cookiesPerClick;
       updateCookieCount();
       

@@ -209,6 +209,8 @@ Other Hobbies:
 - Basketball
 - Reffing
 
+I mostly took this class because not only will it benefit me a lot for later college majors, but it could help with job applications to get some experience to show to other companies that i've had experience in this subject, or i've delt with a situation like this before. 
+
 This is My Nighthawk Homepage. Here are three buttons:
 <style>
   hr {
@@ -234,7 +236,7 @@ This is My Nighthawk Homepage. Here are three buttons:
     box-shadow: 2px 2px 0px 1px white;
     border-width: thick;
   }
-  .chicken_sandwich {
+  .chicken_sandwich { 
     -webkit-animation: spin 1s linear infinite;
     animation: spin 1s linear infinite;
   }
@@ -264,6 +266,7 @@ This is My Nighthawk Homepage. Here are three buttons:
     <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
       <br><br><br><br>
     <div class ="chicken_sandwich"><img src = "images/Dog.png" alt= "Logo img" width="250" height="250"></div>
+    <img src = "images/Chicken_Sandwich.png" alt= "Logo img" width="250" height="250">
       <br><hr>
     <h3> EXAMPLE BUTTONS: W/ & W/O LINK </h3>
     <button id = "x">Without</button>
