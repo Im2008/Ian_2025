@@ -81,15 +81,16 @@ HTML implementation of the calculator.
 <!-- JavaScript (JS) implementation of the calculator. -->
 <script>
 // initialize important variables to manage calculations
+// initialize important variables to manage calculations
 var firstNumber = null;
 var operator = null;
 var nextReady = true;
-//Build objects containing key elements
+// Build objects containing key elements
 const output = document.getElementById("output");
 const numbers = document.querySelectorAll(".calculator-number");
 const operations = document.querySelectorAll(".calculator-operation");
-const clear = document.querySelectorAll(".calculator-clear");
-const equals = document.querySelectorAll(".calculator-equals");
+const clear = document.querySelector(".calculator-clear");
+const equals = document.querySelector(".calculator-equals");
 
 // Number buttons listener
 numbers.forEach(button => {
@@ -99,19 +100,19 @@ numbers.forEach(button => {
 });
 
 // Number action
-function number (value) { // function to input numbers into the calculator
+function number(value) {
     if (value != ".") {
-        if (nextReady == true) { // nextReady is used to tell the computer when the user is going to input a completely new number
+        if (nextReady == true) {
             output.innerHTML = value;
-            if (value != "0") { // if statement to ensure that there are no multiple leading zeroes
+            if (value != "0") {
                 nextReady = false;
             }
         } else {
-            output.innerHTML = output.innerHTML + value; // concatenation is used to add the numbers to the end of the input
+            output.innerHTML += value;
         }
-    } else { // special case for adding a decimal; can't have two decimals
+    } else {
         if (output.innerHTML.indexOf(".") == -1) {
-            output.innerHTML = output.innerHTML + value;
+            output.innerHTML += value;
             nextReady = false;
         }
     }
@@ -125,14 +126,13 @@ operations.forEach(button => {
 });
 
 // Operator action
-function operation (choice) { // function to input operations into the calculator
-    if (firstNumber == null) { // once the operation is chosen, the displayed number is stored into the variable firstNumber
-        firstNumber = parseInt(output.innerHTML);
+function operation(choice) {
+    if (firstNumber == null) {
+        firstNumber = parseFloat(output.innerHTML);
         nextReady = true;
         operator = choice;
-        return; // exits function
+        return;
     }
-    // occurs if there is already a number stored in the calculator
     firstNumber = calculate(firstNumber, parseFloat(output.innerHTML)); 
     operator = choice;
     output.innerHTML = firstNumber.toString();
@@ -140,7 +140,7 @@ function operation (choice) { // function to input operations into the calculato
 }
 
 // Calculator
-function calculate (first, second) { // function to calculate the result of the equation
+function calculate(first, second) {
     let result = 0;
     switch (operator) {
         case "+":
@@ -153,6 +153,10 @@ function calculate (first, second) { // function to calculate the result of the 
             result = first * second;
             break;
         case "/":
+            if (second === 0) {
+                alert("Cannot divide by zero!");
+                return first;
+            }
             result = first / second;
             break;
         default: 
@@ -162,62 +166,28 @@ function calculate (first, second) { // function to calculate the result of the 
 }
 
 // Equals button listener
-equals.forEach(button => {
-  button.addEventListener("click", function() {
+equals.addEventListener("click", function() {
     equal();
-  });
 });
 
 // Equal action
-function equal () { // function used when the equals button is clicked; calculates equation and displays it
+function equal() {
     firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
     output.innerHTML = firstNumber.toString();
     nextReady = true;
 }
 
 // Clear button listener
-clear.forEach(button => {
-  button.addEventListener("click", function() {
+clear.addEventListener("click", function() {
     clearCalc();
-  });
 });
 
 // A/C action
-function clearCalc () { // clears calculator
+function clearCalc() {
     firstNumber = null;
     output.innerHTML = "0";
     nextReady = true;
-}
-</script>
-
-<!-- 
-Vanta animations just for fun, load JS onto the page
--->
-<script src="{{site.baseurl}}/assets/js/three.r119.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.halo.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.birds.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.net.min.js"></script>
-<script src="{{site.baseurl}}/assets/js/vanta.rings.min.js"></script>
-
-<script>
-// setup vanta scripts as functions
-var vantaInstances = {
-  halo: VANTA.HALO,
-  birds: VANTA.BIRDS,
-  net: VANTA.NET,
-  rings: VANTA.RINGS
 };
-
-// obtain a random vanta function
-var vantaInstance = vantaInstances[Object.keys(vantaInstances)[Math.floor(Math.random() * Object.keys(vantaInstances).length)]];
-
-//Run the animation
-vantaInstance({
-  el: "#animation",
-  mouseControls: true,
-  touchControls: true,
-  gyroControls: false
-});
 </script>
 
 
