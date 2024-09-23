@@ -75,6 +75,9 @@ HTML implementation of the calculator.
       <div class="calculator-number">0</div>
       <div class="calculator-number">.</div>
       <div class="calculator-equals">=</div>
+      <!--row 5-->
+      <div class="calculator-operation">/</div>
+      <div class="calculator-operation">sqrt</div>
   </div>
 </div>
 
@@ -127,15 +130,26 @@ operations.forEach(button => {
 
 // Operator action
 function operation(choice) {
+    if (choice === "sqrt") { // Handle square root immediately
+      if (firstNumber < 0) { // If square root is a negative
+        alert("Cannot calculate square root of a negative number!");
+        return;
+      }
+      firstNumber = parseFloat(output.innerHTML);
+      firstNumber = Math.sqrt(firstNumber); // Use Math.sqrt for square root calculation
+      output.innerHTML = firstNumber.toString();
+      nextReady = true;
+      return;
+    }
     if (firstNumber == null) {
-        firstNumber = parseFloat(output.innerHTML);
+        firstNumber = parseFloat(output.innerHTML); //Parsefloat allows a decimal to be produced
         nextReady = true;
         operator = choice;
         return;
     }
     firstNumber = calculate(firstNumber, parseFloat(output.innerHTML)); 
     operator = choice;
-    output.innerHTML = firstNumber.toString();
+    output.innerHTML = firstNumber.toString(); // allows decimals...
     nextReady = true;
 }
 

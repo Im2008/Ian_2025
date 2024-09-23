@@ -25,11 +25,16 @@ Jekyll Table Reference: https://idratherbewriting.com/documentation-theme-jekyll
 --->
 
 {% assign BITS = 8 %}
-
 <style>
     td {
         text-align: center;
         vertical-align: middle;
+    }
+    .color-box {
+        width: 100px;
+        height: 100px;
+        margin: 10px auto;
+        background-color: #000000;
     }
 </style>
 
@@ -41,6 +46,7 @@ Jekyll Table Reference: https://idratherbewriting.com/documentation-theme-jekyll
             <th>Octal</th>
             <th>Hexadecimal</th>
             <th>Decimal</th>
+            <th>ASCII</th>
             <th>Minus</th>
         </tr>
     </thead>
@@ -51,40 +57,37 @@ Jekyll Table Reference: https://idratherbewriting.com/documentation-theme-jekyll
             <td id="octal">0</td>
             <td id="hexadecimal">0</td>
             <td id="decimal">0</td>
+            <td id="ascii">N/A</td>
             <td><div class="calc-button" id="sub1" onclick="add(-1)">-1</div></td>
         </tr>
     </tbody>
 </table>
 
-{% comment %}
-Liquid for loop includes last number, thus the Minus
-{% endcomment %}
-{% assign bits = BITS | minus: 1 %} 
-
+<!-- Bits Table with values displayed -->
 <table>
     <thead>
         <tr>
-            {% comment %}
-            Build many bits
-            {% endcomment %}
+            {% assign bit_values = "128,64,32,16,8,4,2,1" | split: ',' %}
             {% for i in (0..bits) %}
-            <th><img id="bulb{{ i }}" src="{{site.baseurl}}/images/bulb_off.png" alt="" width="40" height="Auto">
+            <th>
+                <img id="bulb{{ i }}" src="{{site.baseurl}}/images/bulb_off.png" alt="" width="40" height="Auto">
                 <div class="button" id="butt{{ i }}" onclick="javascript:toggleBit({{ i }})">Turn on</div>
+                <div>{{ bit_values[i] }}</div> <!-- Display bit value (Hack 1) -->
             </th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
         <tr>
-            {% comment %}
-            Value of bit
-            {% endcomment %}
             {% for i in (0..bits) %}
-            <td><input type='text' id="digit{{ i }}" Value="0" size="1" readonly></td>
+            <td><input type='text' id="digit{{ i }}" Value="0" size="1" oninput="updateFromInput({{ i }})"></td> <!-- Hack 2 -->
             {% endfor %}
         </tr>
     </tbody>
 </table>
+
+<!-- Display color box when using 24 bits -->
+<div class="color-box" id="color-box"></div>
 
 <script>
     const BITS = {{ BITS }};
@@ -92,50 +95,59 @@ Liquid for loop includes last number, thus the Minus
     const MSG_ON = "Turn on";
     const IMAGE_ON = "{{site.baseurl}}/images/bulb_on.gif";
     const MSG_OFF = "Turn off";
-    const IMAGE_OFF = "{{site.baseurl}}/images/bulb_off.png"
+    const IMAGE_OFF = "{{site.baseurl}}/images/bulb_off.png";
 
-    // return string with current value of each bit
+    // Return string with current value of each bit
     function getBits() {
         let bits = "";
-        for(let i = 0; i < BITS; i++) {
+        for (let i = 0; i < BITS; i++) {
             bits = bits + document.getElementById('digit' + i).value;
         }
         return bits;
     }
-    // setter for Document Object Model (DOM) values
+
+    // Set conversions and ASCII character (Hack 3)
     function setConversions(binary) {
+        const decimalValue = parseInt(binary, 2);
         document.getElementById('binary').innerHTML = binary;
-        // Octal conversion
-        document.getElementById('octal').innerHTML = parseInt(binary, 2).toString(8);
-        // Hexadecimal conversion
-        document.getElementById('hexadecimal').innerHTML = parseInt(binary, 2).toString(16);
-        // Decimal conversion
-        document.getElementById('decimal').innerHTML = parseInt(binary, 2).toString();
+        document.getElementById('octal').innerHTML = decimalValue.toString(8);
+        document.getElementById('hexadecimal').innerHTML = decimalValue.toString(16);
+        document.getElementById('decimal').innerHTML = decimalValue;
+
+        // ASCII display
+        if (decimalValue >= 32 && decimalValue <= 126) {
+            document.getElementById('ascii').innerHTML = String.fromCharCode(decimalValue);
+        } else {
+            document.getElementById('ascii').innerHTML = "N/A";
+        }
+
+        // Update color if we are using 24 bit
+        if (BITS === 24) {
+            updateColor(binary);
+        }
     }
-    // convert decimal to base 2 using modulo with divide method
+
+    // Convert decimal to base 2 with padding for binary
     function decimal_2_base(decimal, base) {
         let conversion = "";
-        // loop to convert to base
         do {
-            let digit = decimal % base;           // obtain right most digit
-            conversion = "" + digit + conversion; // what does this do? inserts digit to front of string
-            decimal = ~~(decimal / base);         // what does this do? divides by base what is ~~? force whole number
-        } while (decimal > 0);                    // why while at the end? 0 pads front of binary number
-            // loop to pad with zeros
-            if (base === 2) {                     // only pad for binary conversions
-                for (let i = 0; conversion.length < BITS; i++) {
-                    conversion = "0" + conversion;
+            let digit = decimal % base;
+            conversion = "" + digit + conversion;
+            decimal = ~~(decimal / base);
+        } while (decimal > 0);
+        if (base === 2) {
+            while (conversion.length < BITS) {
+                conversion = "0" + conversion;
             }
         }
         return conversion;
     }
-    // toggle selected bit and recalculate
+
+    // Toggle selected bit
     function toggleBit(i) {
-        //alert("Digit action: " + i );
         const dig = document.getElementById('digit' + i);
         const image = document.getElementById('bulb' + i);
         const butt = document.getElementById('butt' + i);
-        // Change digit and visual
         if (image.src.match(IMAGE_ON)) {
             dig.value = 0;
             image.src = IMAGE_OFF;
@@ -145,25 +157,26 @@ Liquid for loop includes last number, thus the Minus
             image.src = IMAGE_ON;
             butt.innerHTML = MSG_OFF;
         }
-        // Binary numbers
-        const binary = getBits();
-        setConversions(binary);
+        setConversions(getBits());
     }
-    // add is positive integer, subtract is negative integer
+
+    // Update bit from text input
+    function updateFromInput(i) {
+        const dig = document.getElementById('digit' + i).value;
+        toggleBit(i); // Toggles based on user input
+    }
+
+    // Add and subtract values
     function add(n) {
         let binary = getBits();
-        // convert to decimal and do math
         let decimal = parseInt(binary, 2);
-        if (n > 0) {  // PLUS
-            decimal = MAX === decimal ? 0 : decimal += n; // OVERFLOW or PLUS
-        } else  {     // MINUS
-            decimal = 0 === decimal ? MAX : decimal += n; // OVERFLOW or MINUS
+        if (n > 0) {
+            decimal = MAX === decimal ? 0 : decimal += n;
+        } else {
+            decimal = 0 === decimal ? MAX : decimal += n;
         }
-        // convert the result back to binary
         binary = decimal_2_base(decimal, 2);
-        // update conversions
         setConversions(binary);
-        // update bits
         for (let i = 0; i < binary.length; i++) {
             let digit = binary.substr(i, 1);
             document.getElementById('digit' + i).value = digit;
@@ -174,6 +187,16 @@ Liquid for loop includes last number, thus the Minus
                 document.getElementById('bulb' + i).src = IMAGE_OFF;
                 document.getElementById('butt' + i).innerHTML = MSG_ON;
             }
+        }
+    }
+
+    // Updates color when 24 bits are toggled
+    function updateColor(binary) {
+        if (binary.length === 24) {
+            const red = parseInt(binary.substr(0, 8), 2);
+            const green = parseInt(binary.substr(8, 8), 2);
+            const blue = parseInt(binary.substr(16, 8), 2);
+            document.getElementById('color-box').style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
         }
     }
 </script>

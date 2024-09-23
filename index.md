@@ -263,13 +263,14 @@ This is My Nighthawk Homepage. Here are three buttons:
     <hr>
     <a href = "https://delnorte.powayusd.com/apps/bell_schedules/"><button id="chicken2"><div class = "Border_3"> This button gets you to DNHS bell schedule</div></button></a>
       <br><br><br><br>
-    <div class ="chicken_sandwich"><img src = "images/Chicken_Sandwich.png" alt= "Logo img" width="250" height="250"></div>
+    <div class ="chicken_sandwich"><img src = "images/Dog.png" alt= "Logo img" width="250" height="250"></div>
       <br><hr>
     <h3> EXAMPLE BUTTONS: W/ & W/O LINK </h3>
     <button id = "x">Without</button>
     <br><br>
     <a href="about:blank"><button id = "x">With</button></a>
+    <br><br>
+    <h2>(Here is my games!):</h2>
   </body>
 </html>
-
 {% include nav/javascript_project.html %}
