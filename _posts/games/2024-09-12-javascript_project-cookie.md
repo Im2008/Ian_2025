@@ -84,7 +84,7 @@ comments: true
   <button id="upgrade-btn" class="upgrade-btn" disabled>Upgrade (Cost: 50 cookies)</button>
 
   <!-- Add audio element for click sound -->
-  <audio id="click-sound" src="audio/clicker.mp3"></audio>
+  <audio id="click-sound" src="clicker.mp3"></audio>
 
   <script>
     let cookieCount = 0;
